@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import './home.css';
 import video from '../../Assets/Videos/video.mp4';
 import { IoLocationOutline } from "react-icons/io5";
@@ -8,12 +8,16 @@ import { TbApps } from "react-icons/tb";
 import Aos from 'aos';
 import 'aos/dist/aos.css';
 
-
 const Home = () => {
+    const [price, setPrice] = useState(20000000); // Giá trị mặc định là 20.000.000 VND
 
     useEffect(() => {
-        Aos.init({ duration: 2000 })
-    })
+        Aos.init({ duration: 2000 });
+    }, []);
+
+    const handlePriceChange = (event) => {
+        setPrice(event.target.value * 1000000); // Chuyển giá trị thành VND
+    };
 
     return (
         <section className='home'>
@@ -55,10 +59,16 @@ const Home = () => {
                     <div className="priceInput">
                         <div className="label_total flex">
                             <label htmlFor="price">Giá tối đa:</label>
-                            <h3 className="total">20.000.000 VND</h3>
+                            <h3 className="total">{price.toLocaleString()} VND</h3>
                         </div>
                         <div className="input flex">
-                            <input type="range" max={20} min={3} />
+                            <input
+                                type="range"
+                                max={20}
+                                min={3}
+                                value={price / 1000000}
+                                onChange={handlePriceChange}
+                            />
                         </div>
                     </div>
 
@@ -87,4 +97,4 @@ const Home = () => {
     )
 }
 
-export default Home
+export default Home;
