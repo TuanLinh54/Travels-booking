@@ -9,14 +9,14 @@ import Aos from 'aos';
 import 'aos/dist/aos.css';
 
 const Home = () => {
-    const [price, setPrice] = useState(20000000); // Giá trị mặc định là 20.000.000 VND
+    const [price, setPrice] = useState(20000000);
 
     useEffect(() => {
         Aos.init({ duration: 2000 });
     }, []);
 
     const handlePriceChange = (event) => {
-        setPrice(event.target.value * 1000000); // Chuyển giá trị thành VND
+        setPrice(event.target.value * 1000000);
     };
 
     return (
